@@ -1,0 +1,24 @@
+{
+    "name": "joomtriggers/ideamart-php",
+    "description": "Flexible Ideamart PHP API",
+    "type": "library",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Gnanakeethan Balasubramaniam",
+            "email": "gnanakeethan@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev":{
+        "phpunit/phpunit":"*",
+        "mockery/mockery":"*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Joomtriggers\\Ideamart\\Tests\\": "tests",
+            "Joomtriggers\\Ideamart\\": "src"
+        }
+    }
+}
