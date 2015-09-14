@@ -32,5 +32,15 @@ class Handler
     {
 
     }
+    /**
+     * Passing to SMS Handler
+     *
+     * @return SMS\Handler
+     */
+    public function sms()
+    {
+        return new SMS\Handler();
+    }
+
 
 }
