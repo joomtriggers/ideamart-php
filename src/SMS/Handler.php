@@ -12,7 +12,7 @@
  * @link     http://github.com/joomtriggers/ideamart-php/
  */
 
-namespace Joomtriggers\Ideamart\Handler;
+namespace Joomtriggers\Ideamart\SMS;
 
 /**
  * Class: Handler
@@ -29,8 +29,12 @@ class Handler
     /**
      * @param mixed
      */
-    public function __construct()
-    {
+    public function __construct(
+        AddressBrokerInterface $addressBroker,
+        MessageBrokerInterface $messageBroker,
+        ServiceBrokerInterface $serviceBroker,
+        ConfigurationInterface $configurationBroker
+    ) {
     }
 
 
@@ -43,18 +47,33 @@ class Handler
      */
     public function addSubscriber($number)
     {
+        $this->addressBroker->addSubscriber($number);
+
         return $this;
     }
 
     /**
-     * remove Subscriber
+     * Remove Subscriber
      *
      * @return Handler
      */
     public function removeSubscriber($number)
     {
+        $this->addressBroker->removeSubscriber($number);
+
         return $this;
     }
+
+    /**
+     * Getting Subscribers
+     *
+     * @return AddressBrokerInterface
+     */
+    public function getSubscribers()
+    {
+        return $this->addressBroker->getSubscribers();
+    }
+
 
     /**
      * Setting the message to send
@@ -63,8 +82,35 @@ class Handler
      */
     public function setMessage($message)
     {
+        $this->messageBroker->setMessage($message);
+
         return $this;
     }
+
+    /**
+     * Get the message
+     *
+     * @return MessageBrokerInterface
+     *
+     */
+    public function getMessage()
+    {
+        return $this->messageBroker->getMessage();
+    }
+
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function configure(Array $configuration)
+    {
+        $this->configurationBroker->configure($configuration);
+
+        return $this;
+    }
+
 
 
     /**
@@ -75,6 +121,12 @@ class Handler
     public function send()
     {
 
+        return $this->sender->send(
+            $this->messageBroker,
+            $this->addressBroker,
+            $this->serviceBroker,
+            $this->configurationBroker
+        );
     }
 
 }
