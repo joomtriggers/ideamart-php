@@ -37,9 +37,20 @@ class Handler
      *
      * @return SMS\Handler
      */
-    public function sms()
-    {
-        return new SMS\Handler();
+    public function sms(
+    ) {
+        $messageBroker;
+        $addressBroker;
+        $serviceBroker;
+        $configurationBroker;
+        $sender;
+        return new SMS\Handler(
+            $addressBroker,
+            $messageBroker,
+            $serviceBroker,
+            $configurationBroker,
+            $sender
+        );
     }
 
 

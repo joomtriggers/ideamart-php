@@ -33,7 +33,8 @@ class Handler
         AddressBrokerInterface $addressBroker,
         MessageBrokerInterface $messageBroker,
         ServiceBrokerInterface $serviceBroker,
-        ConfigurationInterface $configurationBroker
+        ConfigurationInterface $configurationBroker,
+        SenderInterface $sender
     ) {
     }
 
