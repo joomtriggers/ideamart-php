@@ -1,10 +1,7 @@
 #PHP SDK for Dialog Ideamart
 
-This is an initiative to create a composable package of Ideamart PHP SDKs to
-allow developers to develop in a quick passioned way. 
+இது Ideamart க்கான ஒரு PHP கோப்புக்களை கொண்ட களஞ்சியமாக அமையும். ஏற்கனவே உள்ள PHP கோப்புகளை விட சிறப்பாக வடிவமைக்கப்படும்.
 
-The project will be getting its initial ideas from existing 
-original Ideamart PHP SDKs. 
+ஏற்கனவே உள்ள Ideamart PHP கோப்புக்களிலிருந்து இந்த களஞ்சியம் பெரும்பாலான கருத்துக்களில் ஒத்து போகும்.
 
-The project expects to fill the gap between using a Template based eco-system
-and a REST-APIs of Ideamart IdeaPro Apps. 
+அத்துடன் இது ஏற்கனவே உள்ள Ideamart IdeaApp வார்ப்புரு சார்ந்த பயன்பாடுகளுக்கும் Ideamart REST API களுக்கும் இடையிலான இடைவெளியை நிறைக்கும் என எதிர்பார்க்கப்படுகிறது.
