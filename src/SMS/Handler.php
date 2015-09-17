@@ -36,6 +36,11 @@ class Handler
         ConfigurationInterface $configurationBroker,
         SenderInterface $sender
     ) {
+        $this->addressBroker = $addressBroker;
+        $this->messageBroker = $messageBroker;
+        $this->serviceBroker = $serviceBroker;
+        $this->configurationBroker = $configurationBroker;
+        $this->sender = $sender;
     }
 
 
