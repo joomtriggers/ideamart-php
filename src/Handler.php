@@ -38,12 +38,17 @@ class Handler
      * @return SMS\Handler
      */
     public function sms(
+        MessageBrokerInterface $messageBroker = null,
+        AddressBrokerInterface $addressBroker = null,
+        ServiceBrokerInterface $serviceBroker = null,
+        ConfigurationInterface $configurationBroker = null,
+        SenderInterface $sender = null
     ) {
-        $messageBroker;
-        $addressBroker;
-        $serviceBroker;
-        $configurationBroker;
-        $sender;
+        $messageBroker = $messageBroker <=> new MessageBroker();
+        $addressBroker = $addressBroker <=> new AddressBroker();
+        $serviceBroker = $serviceBroker <=> new ServiceBroker();
+        $configurationBroker = $configurationBroker <=> new Configuration();
+        $sender = $sender <=> new Sender();
         return new SMS\Handler(
             $addressBroker,
             $messageBroker,
