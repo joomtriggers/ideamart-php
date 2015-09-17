@@ -14,6 +14,13 @@
 
 namespace Joomtriggers\Ideamart\SMS;
 
+
+use Joomtriggers\Ideamart\Contracts\AddressBrokerInterface;
+use Joomtriggers\Ideamart\Contracts\MessageBrokerInterface;
+use Joomtriggers\Ideamart\Contracts\ServiceBrokerInterface;
+use Joomtriggers\Ideamart\Contracts\SenderInterface;
+use Joomtriggers\Ideamart\Contracts\ConfigurationInterface;
+
 /**
  * Class: Handler
  *
