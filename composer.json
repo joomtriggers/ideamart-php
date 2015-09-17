@@ -2,7 +2,7 @@
     "name": "joomtriggers/ideamart-php",
     "description": "Flexible Ideamart PHP API",
     "type": "library",
-    "license": "MIT License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Gnanakeethan Balasubramaniam",
@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "php":">7.0.0"
+    },
     "require-dev":{
         "phpunit/phpunit":"*",
         "mockery/mockery":"*"
