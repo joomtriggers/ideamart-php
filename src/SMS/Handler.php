@@ -41,13 +41,15 @@ class Handler
         MessageBrokerInterface $messageBroker,
         ServiceBrokerInterface $serviceBroker,
         ConfigurationInterface $configurationBroker,
-        SenderInterface $sender
+        SenderInterface $sender,
+        ReceiverInterface $receiver
     ) {
         $this->addressBroker = $addressBroker;
         $this->messageBroker = $messageBroker;
         $this->serviceBroker = $serviceBroker;
         $this->configurationBroker = $configurationBroker;
         $this->sender = $sender;
+        $this->receiver = $receiver;
     }
 
 
@@ -141,6 +143,17 @@ class Handler
             $this->configurationBroker
         );
     }
+
+    /**
+     * Receiving the Request
+     *
+     * @return Handler
+     */
+    public function receive($request)
+    {
+        return $this->receiver->receive($request, $this);
+    }
+
 
 }
 
