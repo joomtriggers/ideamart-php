@@ -1,7 +1,7 @@
 build:
-  image: composer/composer
-
+  image: php:latest
   commands:
-    - composer self-update
-    - composer install --prefer-source
+    - curl -sS https://getcomposer.org/installer | php
+    - ./composer.phar self-update
+    - ./composer.phar install --quiet
     - php -v
