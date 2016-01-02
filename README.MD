@@ -16,7 +16,7 @@ https://getcomposer.org/ பயன்படுத்தவும்
 $ composer require joomtriggers\ideamart-php
 ```
 
-
+Sample PHP Code
 ```php
 use Joomtriggers\Ideamart\Handler;
 
