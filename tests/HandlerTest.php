@@ -44,6 +44,10 @@ class HandlerTest extends TestCase
             ->addSubscriber('tel:9900000')
             ->send())
         ;
+        $request = '"message":"my testing message",
+            "address":"tel:94777323654", "requestId":"APP_000001",
+            "encoding":"0", "version":"1.0"';
+        var_dump($handler->sms()->receiver(json_decode($request))->getMessage());
     }
 
 }
