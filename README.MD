@@ -23,7 +23,7 @@ use Joomtriggers\Ideamart\Handler;
 $handler = new Handler();
 //sending SMS
 $handler->sms()
-    ->setApplication("APP_007460")
+    ->setApplication("APP_000000")
     ->setSecret("SECRET FROM DIALOG")
     ->setMessage("Message")
     ->addSubscriber('tel:077xxxxxxx')
