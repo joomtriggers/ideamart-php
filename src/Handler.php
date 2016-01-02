@@ -13,7 +13,9 @@
  */
 namespace Joomtriggers\Ideamart;
 
-use Contracts;
+
+use Joomtriggers\Ideamart\Contracts;
+use Joomtriggers\Ideamart\SMS\Brokers;
 /**
  * Class: Handler
  *
@@ -51,10 +53,10 @@ class Handler
         Contracts\ConfigurationInterface $configurationBroker = null,
         Contracts\SenderInterface $sender = null
     ) {
-        $messageBroker = $messageBroker?$messageBroker:new MessageBroker();
-        $addressBroker = $addressBroker?$addressBroker:new AddressBroker();
-        $serviceBroker = $serviceBroker?$serviceBroker:new ServiceBroker();
-        $configurationBroker = $configurationBroker?$configurationBroker:new Configuration();
+        $messageBroker = $messageBroker?$messageBroker:new Brokers\MessageBroker();
+        $addressBroker = $addressBroker?$addressBroker:new Brokers\AddressBroker();
+        $serviceBroker = $serviceBroker?$serviceBroker:new Brokers\ServiceBroker();
+        $configurationBroker = $configurationBroker?$configurationBroker:new Brokers\Configuration();
         $sender = $sender?$sender:new Sender();
         return new SMS\Handler(
             $addressBroker,

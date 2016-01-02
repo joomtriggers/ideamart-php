@@ -2,5 +2,7 @@
 
 namespace Joomtriggers\Ideamart\Contracts;
 
-interface ConfigurationInterface {}
+interface ConfigurationInterface {
+    public function configure(array $config);
+}
 

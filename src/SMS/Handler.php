@@ -17,6 +17,7 @@ namespace Joomtriggers\Ideamart\SMS;
 
 use Joomtriggers\Ideamart\Contracts\AddressBrokerInterface;
 use Joomtriggers\Ideamart\Contracts\MessageBrokerInterface;
+use Joomtriggers\Ideamart\Contracts\ReceiverInterface;
 use Joomtriggers\Ideamart\Contracts\ServiceBrokerInterface;
 use Joomtriggers\Ideamart\Contracts\SenderInterface;
 use Joomtriggers\Ideamart\Contracts\ConfigurationInterface;
@@ -114,11 +115,6 @@ class Handler
     }
 
 
-    /**
-     * undocumented function
-     *
-     * @return void
-     */
     public function configure(Array $configuration)
     {
         $this->configurationBroker->configure($configuration);
@@ -128,11 +124,6 @@ class Handler
 
 
 
-    /**
-     * Send the message
-     *
-     * @return void
-     */
     public function send()
     {
 
@@ -145,6 +136,7 @@ class Handler
     }
 
     /**
+     *
      * Receiving the Request
      *
      * @return Handler
