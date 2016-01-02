@@ -1,0 +1,7 @@
+build:
+  image: composer/composer
+
+  commands:
+    - composer self-update
+    - composer install --prefer-source
+    - php -v
