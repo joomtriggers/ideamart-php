@@ -1,5 +1,6 @@
 build:
   image: php:latest
+  privileged: true
   commands:
     - sudo apt-get install git
     - curl -sS https://getcomposer.org/installer | php
