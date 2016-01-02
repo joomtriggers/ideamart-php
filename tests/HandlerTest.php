@@ -16,6 +16,10 @@
 
 namespace Joomtriggers\Ideamart\Tests;
 
+
+
+use Joomtriggers\Ideamart\Handler;
+
 /**
  * Class: HandlerTest
  *
@@ -30,6 +34,16 @@ namespace Joomtriggers\Ideamart\Tests;
 class HandlerTest extends TestCase
 {
 
-    public function testSample(){}
+    public function testSample(){
+
+        $handler = new Handler();
+        var_dump($handler->sms()
+            ->setApplication("APP_007460")
+            ->setSecret("JUGGLISH")
+            ->setMessage("Message")
+            ->addSubscriber('tel:9900000')
+            ->send())
+        ;
+    }
 
 }

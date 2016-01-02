@@ -20,10 +20,12 @@ trait Core {
         $response = curl_exec($ch);
         curl_close($ch);
 
-        $this->log->info("SENDING REQUEST :" . $jsonResponse);
-        $this->log->info("SENDING REQUEST TO URL:" . $url);
-        $this->log->info("RECEIVED RESPONSE :" . $response);
-
+//        $this->log->info("SENDING REQUEST :" . $jsonResponse);
+//        $this->log->info("SENDING REQUEST TO URL:" . $url);
+//        $this->log->info("RECEIVED RESPONSE :" . $response);
+        var_dump($jsonResponse);
+        var_dump($url);
+        var_dump($response);
         return $response;
     }
 }

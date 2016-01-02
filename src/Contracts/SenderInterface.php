@@ -8,7 +8,6 @@ interface SenderInterface
     public function send(
         MessageBrokerInterface $messageBrokerInterface,
         AddressBrokerInterface $addressBrokerInterface,
-        ServiceBrokerInterface $serviceBrokerInterface,
         ConfigurationInterface $configurationInterface);
 }
 

@@ -35,35 +35,36 @@ class Handler
     {
 
     }
+
     /**
      * Passing SMS to SMS\Handler
      *
-     * @param Contracts\MessageBrokerInterface $messageBroker       Broker Interface
-     * @param Contracts\AddressBrokerInterface $addressBroker       Broker Interface
-     * @param Contracts\ServiceBrokerInterface $serviceBroker       Broker Interface
+     * @param Contracts\MessageBrokerInterface $messageBroker Broker Interface
+     * @param Contracts\AddressBrokerInterface $addressBroker Broker Interface
+     * @param Contracts\ServiceBrokerInterface $serviceBroker Broker Interface
      * @param Contracts\ConfigurationInterface $configurationBroker Broker Interface
-     * @param Contracts\SenderInterface        $sender              Broker Interface
-     *
-     * @return SMS\Handler()
+     * @param Contracts\SenderInterface $sender Broker Interface
+     * @param Contracts\ReceiverInterface $receiver
+     * @return SMS\Handler
      */
     public function sms(
         Contracts\MessageBrokerInterface $messageBroker = null,
         Contracts\AddressBrokerInterface $addressBroker = null,
-        Contracts\ServiceBrokerInterface $serviceBroker = null,
         Contracts\ConfigurationInterface $configurationBroker = null,
-        Contracts\SenderInterface $sender = null
+        Contracts\SenderInterface $sender = null,
+        Contracts\ReceiverInterface $receiver = null
     ) {
         $messageBroker = $messageBroker?$messageBroker:new Brokers\MessageBroker();
         $addressBroker = $addressBroker?$addressBroker:new Brokers\AddressBroker();
-        $serviceBroker = $serviceBroker?$serviceBroker:new Brokers\ServiceBroker();
-        $configurationBroker = $configurationBroker?$configurationBroker:new Brokers\Configuration();
-        $sender = $sender?$sender:new Sender();
+        $configurationBroker = $configurationBroker?$configurationBroker:new SMS\Configuration();
+        $sender = $sender?$sender:new SMS\Sender();
+        $receiver = $receiver?$receiver:new SMS\Receiver();
         return new SMS\Handler(
             $addressBroker,
             $messageBroker,
-            $serviceBroker,
             $configurationBroker,
-            $sender
+            $sender,
+            $receiver
         );
     }
 

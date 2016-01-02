@@ -1,6 +1,7 @@
 <?php
 
 namespace Joomtriggers\Ideamart\SMS\Brokers;
+use Joomtriggers\Ideamart\Contracts\MessageBrokerInterface;
 
 /**
  * Class: MessageBroker
@@ -25,7 +26,18 @@ class MessageBroker implements MessageBrokerInterface
 
     }
 
+    protected $message = "";
 
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+    }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
 
 }
 

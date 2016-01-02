@@ -2,6 +2,8 @@
 
 namespace Joomtriggers\Ideamart\SMS\Brokers;
 
+use Joomtriggers\Ideamart\Contracts\AddressBrokerInterface;
+
 class AddressBroker implements AddressBrokerInterface
 {
 

@@ -40,14 +40,12 @@ class Handler
     public function __construct(
         AddressBrokerInterface $addressBroker,
         MessageBrokerInterface $messageBroker,
-        ServiceBrokerInterface $serviceBroker,
         ConfigurationInterface $configurationBroker,
         SenderInterface $sender,
         ReceiverInterface $receiver
     ) {
         $this->addressBroker = $addressBroker;
         $this->messageBroker = $messageBroker;
-        $this->serviceBroker = $serviceBroker;
         $this->configurationBroker = $configurationBroker;
         $this->sender = $sender;
         $this->receiver = $receiver;
@@ -114,25 +112,49 @@ class Handler
         return $this->messageBroker->getMessage();
     }
 
-
     public function configure(Array $configuration)
     {
         $this->configurationBroker->configure($configuration);
 
         return $this;
     }
+    public function getConfigurations(){
+        return $this->configurationBroker->getConfigurations();
+    }
+
+    public function getConfiguration($key){
+        return $this->configurationBroker->getConfiguration($key);
+    }
+
+    public function setConfiguration($key,$value){
+        $this->configurationBroker->setConfiguration($key,$value);
+        return $this;
+    }
+
+    public function setApplication($app){
+        $this->configurationBroker->setConfiguration('APP_ID',$app);
+        return $this;
+    }
+    public function setServer($server){
+        $this->configurationBroker->setConfiguration('SERVER_URL',$server);
+        return $this;
+    }
+    public function setSecret($secret){
+        $this->configurationBroker->setConfiguration("APP_SECRET",$secret);
+        return $this;
+    }
 
 
-
+    /**
+     * @return mixed
+     */
     public function send()
     {
 
         return $this->sender->send(
             $this->messageBroker,
             $this->addressBroker,
-            $this->serviceBroker,
-            $this->configurationBroker
-        );
+            $this->configurationBroker);
     }
 
     /**
