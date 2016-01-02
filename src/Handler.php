@@ -13,6 +13,7 @@
  */
 namespace Joomtriggers\Ideamart;
 
+use Contracts;
 /**
  * Class: Handler
  *
@@ -33,22 +34,28 @@ class Handler
 
     }
     /**
-     * Passing to SMS Handler
+     * Passing SMS to SMS\Handler
      *
-     * @return SMS\Handler
+     * @param Contracts\MessageBrokerInterface $messageBroker       Broker Interface
+     * @param Contracts\AddressBrokerInterface $addressBroker       Broker Interface
+     * @param Contracts\ServiceBrokerInterface $serviceBroker       Broker Interface
+     * @param Contracts\ConfigurationInterface $configurationBroker Broker Interface
+     * @param Contracts\SenderInterface        $sender              Broker Interface
+     *
+     * @return SMS\Handler()
      */
     public function sms(
-        MessageBrokerInterface $messageBroker = null,
-        AddressBrokerInterface $addressBroker = null,
-        ServiceBrokerInterface $serviceBroker = null,
-        ConfigurationInterface $configurationBroker = null,
-        SenderInterface $sender = null
+        Contracts\MessageBrokerInterface $messageBroker = null,
+        Contracts\AddressBrokerInterface $addressBroker = null,
+        Contracts\ServiceBrokerInterface $serviceBroker = null,
+        Contracts\ConfigurationInterface $configurationBroker = null,
+        Contracts\SenderInterface $sender = null
     ) {
-        $messageBroker = $messageBroker <=> new MessageBroker();
-        $addressBroker = $addressBroker <=> new AddressBroker();
-        $serviceBroker = $serviceBroker <=> new ServiceBroker();
-        $configurationBroker = $configurationBroker <=> new Configuration();
-        $sender = $sender <=> new Sender();
+        $messageBroker = $messageBroker?$messageBroker:new MessageBroker();
+        $addressBroker = $addressBroker?$addressBroker:new AddressBroker();
+        $serviceBroker = $serviceBroker?$serviceBroker:new ServiceBroker();
+        $configurationBroker = $configurationBroker?$configurationBroker:new Configuration();
+        $sender = $sender?$sender:new Sender();
         return new SMS\Handler(
             $addressBroker,
             $messageBroker,
