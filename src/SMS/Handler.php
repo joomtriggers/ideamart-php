@@ -34,6 +34,7 @@ use Joomtriggers\Ideamart\Contracts\ConfigurationInterface;
 class Handler
 {
 
+    private $_mode = "sending";
 
     public function __construct(
         AddressBrokerInterface $addressBroker,
@@ -107,6 +108,9 @@ class Handler
      */
     public function getMessage()
     {
+        if($this->_mode = "receiving"){
+            return $this->receiver->getMessage();
+        }
         return $this->messageBroker->getMessage();
     }
 
@@ -162,7 +166,8 @@ class Handler
      */
     public function receive($request=null)
     {
-        if (!is_array($request)) {
+        $this->_mode = "receiving";
+        if (!isset($request)) {
             $post = file_get_contents('php://input');
             $request = json_decode($post);
         }

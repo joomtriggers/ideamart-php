@@ -10,6 +10,7 @@ class Receiver implements ReceiverInterface
     protected $sender = "";
     protected $encoding = 0;
     protected $app_id="";
+    protected $message="";
     /**
      * Receives the request
      *
@@ -21,9 +22,11 @@ class Receiver implements ReceiverInterface
     public function receive($request,Handler $handler)
     {
 
-        $this->sender = $request['SourceAddress'];
-        $this->app_id = $request['requestId'];
-        $this->encoding = $request['encoding'];
+        $this->sender = $request->sourceAddress;
+        $this->app_id = $request->requestId;
+        $this->encoding = $request->encoding;
+        $this->message = $request->message;
+
 
         return $handler;
     }
@@ -49,6 +52,16 @@ class Receiver implements ReceiverInterface
 
     public function getApplication(){
         return $this->app_id;
+    }
+
+    /**
+     * Message
+     *
+     * @return void
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 
 
