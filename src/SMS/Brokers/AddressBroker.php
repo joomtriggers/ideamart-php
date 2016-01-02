@@ -5,14 +5,27 @@ namespace Joomtriggers\Ideamart\SMS\Brokers;
 class AddressBroker implements AddressBrokerInterface
 {
 
-    private $numbers;
+    protected $numbers;
 
     /**
+     * Constructor
      *
+     * @return void
      */
     public function __construct()
     {
     }
+
+    /**
+     * Return All Current Subscriber List
+     *
+     * @return array
+     */
+    public function getSubscribers()
+    {
+        return $this->numbers;
+    }
+
     /**
      * Adding Subscriber
      *
@@ -33,7 +46,7 @@ class AddressBroker implements AddressBrokerInterface
      */
     public function removeSubscriber($number)
     {
-        if(($key = array_search($number, $this->numbers)) !== false) {
+        if (($key = array_search($number, $this->numbers)) !== false) {
             unset($this->numbers[$key]);
         }
     }
