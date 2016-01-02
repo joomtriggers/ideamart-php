@@ -2,7 +2,7 @@ build:
   image: php:latest
   privileged: true
   commands:
-    - sudo apt-get install git
+    - apt-get install git
     - curl -sS https://getcomposer.org/installer | php
     - ./composer.phar self-update
     - ./composer.phar install --quiet --prefer-dist
