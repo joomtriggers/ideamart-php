@@ -7,3 +7,15 @@
 ஏற்கனவே உள்ள Ideamart PHP கோப்புக்களிலிருந்து இந்த களஞ்சியம் பெரும்பாலான கருத்துக்களில் ஒத்து போகும்.
 
 அத்துடன் இது ஏற்கனவே உள்ள Ideamart IdeaApp வார்ப்புரு சார்ந்த பயன்பாடுகளுக்கும் Ideamart REST API களுக்கும் இடையிலான இடைவெளியை நிறைக்கும் என எதிர்பார்க்கப்படுகிறது.
+
+```php
+use Joomtriggers\Ideamart\Handler;
+
+$handler = new Handler();
+$handler->sms()
+    ->setApplication("APP_007460")
+    ->setSecret("SECRET FROM DIALOG")
+    ->setMessage("Message")
+    ->addSubscriber('tel:077xxxxxxx')
+    ->send());
+```
