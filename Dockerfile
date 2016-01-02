@@ -1,4 +1,4 @@
 FROM php:latest
 
-RUN apt-get update && apt-get install git
+RUN apt-get update && apt-get install git -y
 
