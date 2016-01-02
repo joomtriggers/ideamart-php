@@ -21,10 +21,22 @@ Sample PHP Code
 use Joomtriggers\Ideamart\Handler;
 
 $handler = new Handler();
+//sending SMS
 $handler->sms()
     ->setApplication("APP_007460")
     ->setSecret("SECRET FROM DIALOG")
     ->setMessage("Message")
     ->addSubscriber('tel:077xxxxxxx')
     ->send());
+
+//receiving SMS
+$handler->sms()
+    ->receive() //receive will be automatically handled if not passed, should be passed as a StdClass Object
+    ->getApplication();
+$handler->sms()
+    ->receive() //receive will be automatically handled if not passed, should be passed as a StdClass Object
+    ->getSender();
+$handler->sms()
+    ->receive() //receive will be automatically handled if not passed, should be passed as a StdClass Object
+    ->getMessage();
 ```
