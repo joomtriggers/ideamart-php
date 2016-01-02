@@ -8,6 +8,15 @@
 
 அத்துடன் இது ஏற்கனவே உள்ள Ideamart IdeaApp வார்ப்புரு சார்ந்த பயன்பாடுகளுக்கும் Ideamart REST API களுக்கும் இடையிலான இடைவெளியை நிறைக்கும் என எதிர்பார்க்கப்படுகிறது.
 
+
+##Installation நிறுவுதல்
+
+https://getcomposer.org/ பயன்படுத்தவும்
+```
+$ composer require joomtriggers\ideamart-php
+```
+
+
 ```php
 use Joomtriggers\Ideamart\Handler;
 
