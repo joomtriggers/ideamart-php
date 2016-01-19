@@ -34,7 +34,6 @@ class Receiver implements ReceiverInterface
     /**
      * undocumented function
      *
-     * @return void
      */
     public function getSender()
     {
@@ -43,7 +42,6 @@ class Receiver implements ReceiverInterface
     /**
      * undocumented function
      *
-     * @return void
      */
     public function getEncoding()
     {
@@ -57,7 +55,6 @@ class Receiver implements ReceiverInterface
     /**
      * Message
      *
-     * @return void
      */
     public function getMessage()
     {

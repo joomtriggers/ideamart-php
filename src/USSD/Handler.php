@@ -5,14 +5,26 @@ namespace Ideamart\USSD\Ideamart;
 use Ideamart\USSD\Ideamart\Maker\Producer;
 use Ideamart\USSD\Ideamart\Receiver\Receiver;
 use Ideamart\USSD\Ideamart\Sender\Sender;
-use Illuminate\Contracts\Foundation\Application;
-use Inqurtime\Source\Applications\ApplicationRepository;
-use Inqurtime\System\Session\Contracts\SessionHandler;
+use SessionHandler;
 
 /**
  * Class Handler
  * @package Inqurtime\System\USSD\Ideamart
+ *
+ *
+ * Planning Interface
+ * $handler = new Ideamart\Handler();
+ * $handler->ussd()->
  */
+
+$handler = new \Joomtriggers\Ideamart\Handler();
+$handler->ussd()
+	->receive($request_array)
+	->setMenu($menu_config)
+	->setConfiguration($server_details)
+	->setResponse(MT_FIN)
+	->makeResponse();
+
 class Handler {
 
 	protected $request = [];
@@ -23,6 +35,10 @@ class Handler {
 
 	protected $sender;
 
+
+
+
+
 	private $application;
 
 	private $producer;
@@ -31,19 +47,16 @@ class Handler {
 
 	private $appRepo;
 
-	public function __construct(SessionHandler $sessionHandler,
+	public function __construct(
+		SessionHandler $sessionHandler,
 		Receiver $receiver,
 		Sender $sender,
-		Producer $producer,
-		ApplicationRepository $applicationRepository,
-		Application $application
+		Producer $producer
 	) {
 		$this->sessionHandler = $sessionHandler;
 		$this->sender = $sender;
 		$this->receiver = $receiver;
 		$this->producer = $producer;
-		$this->application = $application;
-		$this->appRepo = $applicationRepository;
 	}
 
 	/**
