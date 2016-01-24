@@ -1,98 +1,120 @@
 <?php
 
+/**
+ * Class:Handler
+ *
+ * PHP Version: 5.6
+ *
+ * @category Category
+ * @package  Package
+ * @author   Gnanakeethan Balasubramaniam <gnana@keethan.me>
+ * @license  MIT http://opensource.org/licenses/MIT/
+ * @link     http://link/
+ */
 namespace Ideamart\USSD\Ideamart;
+
+
+
+//$handler = new \Joomtriggers\Ideamart\Handler();
+//$handler->ussd()
+    //->receive($request_array)
+    //->getOption($option)
+    //->setOption($option)
+    //->setMenu($menu_config)
+    //->setMessage($custom_message)
+    //->setConfiguration($server_details)
+    //->setResponse(MT_FIN)
+    //->makeResponse();
 
 use Ideamart\USSD\Ideamart\Maker\Producer;
 use Ideamart\USSD\Ideamart\Receiver\Receiver;
 use Ideamart\USSD\Ideamart\Sender\Sender;
-use SessionHandler;
 
 /**
- * Class Handler
- * @package Inqurtime\System\USSD\Ideamart
+ * Class:Handler
  *
- *
- * Planning Interface
- * $handler = new Ideamart\Handler();
- * $handler->ussd()->
+ * @category Category
+ * @package  Package
+ * @author   Gnanakeethan Balasubramaniam <gnana@keethan.me>
+ * @license  MIT http://opensource.org/licenses/MIT/
+ * @link     http://link/
  */
+class Handler
+{
 
-$handler = new \Joomtriggers\Ideamart\Handler();
-$handler->ussd()
-	->receive($request_array)
-	->setMenu($menu_config)
-	->setConfiguration($server_details)
-	->setResponse(MT_FIN)
-	->makeResponse();
+    protected $request = [];
 
-class Handler {
+    protected $sessionHandler;
 
-	protected $request = [];
+    protected $receiver;
 
-	protected $sessionHandler;
-
-	protected $receiver;
-
-	protected $sender;
+    protected $sender;
 
 
 
 
 
-	private $application;
 
-	private $producer;
+    private $producer;
 
-	private $product;
+    private $product;
 
-	private $appRepo;
+    private $appRepo;
 
-	public function __construct(
-		SessionHandler $sessionHandler,
-		Receiver $receiver,
-		Sender $sender,
-		Producer $producer
-	) {
-		$this->sessionHandler = $sessionHandler;
-		$this->sender = $sender;
-		$this->receiver = $receiver;
-		$this->producer = $producer;
-	}
+    /**
+     * __construct
+     *
+     * @param SessionHandler $sessionHandler Session Handling object
+     * @param Receiver       $receiver       Receive handler
+     * @param Sender         $sender         Send Handler
+     * @param Producer       $producer       Menu Manager
+     */
+    public function __construct(
+        SessionHandler $sessionHandler,
+        Receiver $receiver,
+        Sender $sender,
+        Producer $producer
+    ) {
+        $this->sessionHandler = $sessionHandler;
+        $this->sender = $sender;
+        $this->receiver = $receiver;
+        $this->producer = $producer;
+    }
 
-	/**
-	 * @param array $request
-	 *
-	 * @return $this
-	 */
-	public function handle(array $request) {
-		$request = $this->receiver->receive($request);
+    /**
+     * @param array $request
+     *
+     * @return $this
+     */
+    public function handle(array $request) {
+        $request = $this->receiver->receive($request);
 
-		$this->product = $this->producer
-			->loadSetup()
-			->setRequest($request)
-			->translateMessage($this->appRepo)
-			->makeMessage();
+        $this->product = $this->producer
+            ->loadSetup()
+            ->setRequest($request)
+            ->translateMessage($this->appRepo)
+            ->makeMessage();
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function setCustomResponse($response) {
-		$this->product = $response;
+    public function setCustomResponse($response) {
+        $this->product = $response;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	public function setCustomOperation($operation) {
-		$this->sessionHandler->setOperation($operation);
+    public function setCustomOperation($operation) {
+        $this->sessionHandler->setOperation($operation);
 
-		return $this;
+        return $this;
 
-	}
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function makeResponse() {
-		return $this->sender->send($this->product);
-	}
+    /**
+     * @return mixed
+     */
+    public function makeResponse() {
+        return $this->sender->send($this->product);
+    }
 }
