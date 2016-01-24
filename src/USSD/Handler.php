@@ -62,20 +62,16 @@ class Handler
     }
     public function receive(array $request) {
         $request = $this->receiver->receive($request);
-        $this->product = $this->producer->loadSetup()->setRequest($request)->translateMessage($this->appRepo)->makeMessage();
+        $this->product = $this->producer
+            ->setRequest($request)
+            ->translateMessage()
+            ->makeMessage();
         return $this;
     }
-    /**
-     * Get the current Option
-     *
-     * @param mixed $option
-     */
-    public function getOption($option) { }
-    public function setOption($option) { }
-    public function setMessage($custom_message) { return null; }
-    public function setConfiguration($server_details) { return null; }
-    public function setResponse($CONSTANT) { return null; }
-    public function makeResponse() {
-        return $this->sender->send($this->product);
-    }
+    public function getOption($option) {}
+    public function setOption($option) {}
+    public function setMessage($custom_message) {}
+    public function setConfiguration($server_details) {}
+    public function setResponse($CONSTANT) {}
+    public function makeResponse() {}
 }
