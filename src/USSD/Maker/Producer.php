@@ -1,54 +1,58 @@
 <?php
+/**
+ * Class: Producer
+ *
+ * PHP Version: 7.0.0
+ *
+ * @category Category
+ * @package  Package
+ * @author   Gnanakeethan Balasubramaniam <gnana@keethan.me>
+ * @license  MIT http://opensource.org/licenses/MIT/
+ * @link     http://link/
+ */
 
-namespace Ideamart\USSD\Ideamart\Maker;
+namespace Joomtriggers\Ideamart\USSD\Maker;
 
-use Inqurtime\Source\Applications\ApplicationRepository;
+/**
+ * Class: Producer
+ *
+ * @category Category
+ * @package  Package
+ * @author   Gnanakeethan Balasubramaniam <gnana@keethan.me>
+ * @license  MIT http://opensource.org/licenses/MIT/
+ * @link     http://link/
+ */
+class Producer
+{
+    protected $parser;
+    protected $translator;
+    protected $responder;
+    protected $request;
 
-class Producer {
-
-	protected $parser;
-
-	protected $translator;
-
-	protected $responder;
-
-	protected $request;
-
-	/**
-	 * @param \Inqurtime\System\USSD\Ideamart\Maker\Parser            $parser
-	 * @param \Inqurtime\System\USSD\Ideamart\Maker\MessageTranslator $translator
-	 * @param \Inqurtime\System\USSD\Ideamart\Maker\Responder         $responder
-	 */
-	public function __construct(Parser $parser,
-		MessageTranslator $translator,
-		Responder $responder
-	) {
-		$this->parser = $parser;
-		$this->translator = $translator;
-		$this->responder = $responder;
-	}
-
-	public function setRequest(array $request) {
-		$this->request = $request;
-
-		return $this;
-	}
-
-	public function loadSetup() {
-		return $this;
-	}
-
-	public function translateMessage(ApplicationRepository $applicationRepository) {
-		$this->translator->translate($this->request, $this->parser, $applicationRepository);
-
-		return $this;
-	}
-
-	public function makeMessage() {
-		return $this->responder->produceResponse($this->parser, $this->translator);
-	}
-
-	public function __toString() {
-		return $this->responder->getMessage();
-	}
+    public function __construct(
+        Parser $parser,
+        MessageTranslator $translator,
+        Responder $responder
+    ) {
+        $this->parser = $parser;
+        $this->translator = $translator;
+        $this->responder = $responder;
+    }
+    public function setRequest(array $request) {
+        $this->request = $request;
+        return $this;
+    }
+    public function loadSetup() {
+        return $this;
+    }
+    public function translateMessage() {
+        $this->translator->translate($this->request, $this->parser);
+        return $this;
+    }
+    public function makeMessage() {
+        return $this->responder->produceResponse($this->parser, $this->translator);
+    }
+    public function __toString() {
+        return $this->responder->getMessage();
+    }
 }

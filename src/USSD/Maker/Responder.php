@@ -10,113 +10,90 @@ use Inqurtime\System\Session\Contracts\SessionHandler;
  * @package Inqurtime\System\USSD\Ideamart\Maker
  */
 class Responder {
+    protected $session;
+    protected $config;
+    protected $menu_path;
+    protected $option;
+    protected $application;
+    protected $actionPath;
+    protected $variables;
+    protected $actionTrigger;
+    protected $actionMessage;
+    protected $message;
 
-	/**
-	 */
-	protected $session;
+    public function __construct(SessionHandler $sessionHandler) {
+        $this->session = $sessionHandler;
+        $this->application = $application;
+    }
 
-	/**
-	 * @var \Illuminate\Contracts\Config\Config
-	 */
-	protected $config;
+    public function produceResponse(Parser $parser, MessageTranslator $translator,array $request) {
 
-	protected $menu_path;
+        $session = $translator->getSession();
+        $this->config = $request;
+        $this->menu_path = $session->getMenuPath();
+        $this->option = $session->getOption();
+        if ($this->option) {
+            $menu = $parser->getMenuPlain($session);
+            if ($menu['type'] == "message") {
+                $this->message = $menu['message'];
+            } else {
+                $this->message = $this->findActionPath($parser, $session)->triggerAction()->getResponse();
+            }
+        } elseif ($this->option == null) {
+            $this->message = $parser->makeMenu($session);
+        }
 
-	protected $option;
+        return $this->message;
+    }
 
-	protected $application;
+    private function findActionPath(Parser $parser, SessionHandler $session) {
+        $isAction = $this->session->isAction();
+        if ($isAction) {
+            $action = ($parser->getMenuPlain($session)['options'][$isAction]['action']);
+            $this->variables = ($parser->getMenuPlain($session)['options'][$isAction]['variables']);
+        } else {
+            $action = ($parser->getMenuPlain($session)['options'][$this->option]['action']);
+            $this->variables = ($parser->getMenuPlain($session)['options'][$this->option]['variables']);
+        }
+        $this->actionPath = explode('@', $action)[0];
+        $this->actionTrigger = explode('@', $action)[1];
 
-	protected $actionPath;
+        return $this;
+    }
 
-	protected $variables;
+    private function triggerAction() {
+        $actionPath = $this->actionPath;
+        $action = $this->application->make($actionPath);
+        $this->resolveVariables();
+        $this->actionMessage = call_user_func_array([$action, $this->actionTrigger], $this->variables);
+        $this->session->setAction($this->option);
 
-	protected $actionTrigger;
+        return $this;
+    }
 
-	protected $actionMessage;
+    private function getResponse() {
+        return $this->actionMessage;
+    }
 
-	protected $message;
+    public function getMessage() {
+        return $this->message;
+    }
 
-	/**
-	 * @param \Inqurtime\System\Session\Contracts\SessionHandler|\Inqurtime\System\USSD\Ideamart\Session\Contracts\SessionHandler $sessionHandler
-	 * @param \Illuminate\Contracts\Foundation\Application                                                                        $application
-	 *
-	 * @internal param \Illuminate\Contracts\Config\Config $config
-	 */
-	public function __construct(SessionHandler $sessionHandler, Application $application) {
-		$this->session = $sessionHandler;
-		$this->application = $application;
-		$this->config = $this->application->make('config');
-	}
+    private function resolveVariables() {
+        $variablesd = [];
+        foreach ($this->variables as $variable => $value) {
+            if (method_exists($this->session, $value)) {
 
-	public function produceResponse(Parser $parser, MessageTranslator $translator) {
+                $variablesd[$variable] = $this->session->{$value}();
+            } else {
 
-		$session = $translator->getSession();
-		$this->menu_path = $session->getMenuPath();
-		$this->option = $session->getOption();
+                $variablesd[$variable] = $value;
+            }
 
-		if ($this->option) {
-			$menu = $parser->getMenuPlain($session);
+        }
 
-			if ($menu['type'] == "message") {
-				$this->message = $menu['message'];
-			} else {
-				$this->message = $this->findActionPath($parser, $session)->triggerAction()->getResponse();
-			}
-		} elseif ($this->option == null) {
-			$this->message = $parser->makeMenu($session);
-		}
+        $this->variables = $variablesd;
 
-		return $this->message;
-	}
-
-	private function findActionPath(Parser $parser, SessionHandler $session) {
-		$isAction = $this->session->isAction();
-		if ($isAction) {
-			$action = ($parser->getMenuPlain($session)['options'][$isAction]['action']);
-			$this->variables = ($parser->getMenuPlain($session)['options'][$isAction]['variables']);
-		} else {
-			$action = ($parser->getMenuPlain($session)['options'][$this->option]['action']);
-			$this->variables = ($parser->getMenuPlain($session)['options'][$this->option]['variables']);
-		}
-		$this->actionPath = explode('@', $action)[0];
-		$this->actionTrigger = explode('@', $action)[1];
-
-		return $this;
-	}
-
-	private function triggerAction() {
-		$actionPath = $this->actionPath;
-		$action = $this->application->make($actionPath);
-		$this->resolveVariables();
-		$this->actionMessage = call_user_func_array([$action, $this->actionTrigger], $this->variables);
-		$this->session->setAction($this->option);
-
-		return $this;
-	}
-
-	private function getResponse() {
-		return $this->actionMessage;
-	}
-
-	public function getMessage() {
-		return $this->message;
-	}
-
-	private function resolveVariables() {
-		$variablesd = [];
-		foreach ($this->variables as $variable => $value) {
-			if (method_exists($this->session, $value)) {
-
-				$variablesd[$variable] = $this->session->{$value}();
-			} else {
-
-				$variablesd[$variable] = $value;
-			}
-
-		}
-
-		$this->variables = $variablesd;
-
-	}
+    }
 
 }
