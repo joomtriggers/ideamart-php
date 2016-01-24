@@ -62,11 +62,7 @@ class Handler
     }
     public function receive(array $request) {
         $request = $this->receiver->receive($request);
-        $this->product = $this->producer
-            ->loadSetup()
-            ->setRequest($request)
-            ->translateMessage($this->appRepo)
-            ->makeMessage();
+        $this->product = $this->producer->loadSetup()->setRequest($request)->translateMessage($this->appRepo)->makeMessage();
         return $this;
     }
     /**
