@@ -14,7 +14,6 @@
 namespace Ideamart\USSD\Ideamart;
 
 
-
 //$handler = new \Joomtriggers\Ideamart\Handler();
 
 use Joomtriggers\Ideamart\Contracts\USSD\ProducerInterface;
@@ -54,24 +53,46 @@ class Handler
         ReceiverInterface $receiver,
         SenderInterface $sender,
         ProducerInterface $producer
-    ) {
+    )
+    {
         $this->sessionHandler = $sessionHandler;
         $this->sender = $sender;
         $this->receiver = $receiver;
         $this->producer = $producer;
     }
-    public function receive(array $request) {
+
+    public function receive(array $request)
+    {
         $request = $this->receiver->receive($request);
         $this->product = $this->producer
             ->setRequest($request)
             ->translateMessage()
             ->makeMessage();
+
         return $this;
     }
-    public function getOption($option) {}
-    public function setOption($option) {}
-    public function setMessage($custom_message) {}
-    public function setConfiguration($server_details) {}
-    public function setResponse($CONSTANT) {}
-    public function makeResponse() {}
+
+    public function getOption($option)
+    {
+    }
+
+    public function setOption($option)
+    {
+    }
+
+    public function setMessage($custom_message)
+    {
+    }
+
+    public function setConfiguration($server_details)
+    {
+    }
+
+    public function setResponse($CONSTANT)
+    {
+    }
+
+    public function makeResponse()
+    {
+    }
 }
