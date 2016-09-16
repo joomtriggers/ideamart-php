@@ -2,6 +2,8 @@
 
 namespace Joomtriggers\Ideamart\Contracts;
 
-interface ServiceBrokerInterface {}
+interface ServiceBrokerInterface {
+
+}
 
 

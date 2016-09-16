@@ -8,6 +8,7 @@ class ServiceBroker {
 
 	protected $password;
 
+
 	public function __construct($server, $app, $password) {
 		$this->server_url = $server;
 		$this->app_id = $app;
