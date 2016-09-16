@@ -142,7 +142,7 @@ class Handler
         return $this;
     }
     public function setSecret($secret){
-        $this->configurationBroker->setConfiguration("APP_SECRET",$secret);
+        $this->configurationBroker->setConfiguration('APP_SECRET',$secret);
         return $this;
     }
 

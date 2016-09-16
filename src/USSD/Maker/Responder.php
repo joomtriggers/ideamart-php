@@ -41,9 +41,6 @@ class Responder {
         return $this->message;
     }
 
-    private function getResponse() {
-        return $this->actionMessage;
-    }
 
     public function getMessage() {
         return $this->message;
