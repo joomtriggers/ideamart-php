@@ -37,19 +37,15 @@ class Handler
      */
     protected $request = [];
     /**
-     * @var \Ideamart\USSD\Ideamart\SessionHandler|\Joomtriggers\Ideamart\Contracts\USSD\SessionHandlerInterface
      */
     protected $sessionHandler;
     /**
-     * @var \Ideamart\USSD\Ideamart\Receiver|\Joomtriggers\Ideamart\Contracts\USSD\ReceiverInterface
      */
     protected $receiver;
     /**
-     * @var \Ideamart\USSD\Ideamart\Sender|\Joomtriggers\Ideamart\Contracts\USSD\SenderInterface
      */
     protected $sender;
     /**
-     * @var \Ideamart\USSD\Ideamart\Producer|\Joomtriggers\Ideamart\Contracts\USSD\ProducerInterface
      */
     private $producer;
     /**
