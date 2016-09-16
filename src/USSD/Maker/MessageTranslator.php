@@ -8,7 +8,8 @@ class MessageTranslator {
     protected $configLoader;
     protected $serviceBroker;
 
-    public function __construct(SessionHandler $sessionHandler,
+    public function __construct(
+        SessionHandler $sessionHandler,
         Application $application,
         ConfigLoader $configLoader,
         ServiceBroker $serviceBroker
