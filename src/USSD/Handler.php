@@ -32,21 +32,42 @@ use Joomtriggers\Ideamart\Contracts\USSD\SessionHandlerInterface;
  */
 class Handler
 {
+    /**
+     * @var array
+     */
     protected $request = [];
+    /**
+     * @var \Ideamart\USSD\Ideamart\SessionHandler|\Joomtriggers\Ideamart\Contracts\USSD\SessionHandlerInterface
+     */
     protected $sessionHandler;
+    /**
+     * @var \Ideamart\USSD\Ideamart\Receiver|\Joomtriggers\Ideamart\Contracts\USSD\ReceiverInterface
+     */
     protected $receiver;
+    /**
+     * @var \Ideamart\USSD\Ideamart\Sender|\Joomtriggers\Ideamart\Contracts\USSD\SenderInterface
+     */
     protected $sender;
+    /**
+     * @var \Ideamart\USSD\Ideamart\Producer|\Joomtriggers\Ideamart\Contracts\USSD\ProducerInterface
+     */
     private $producer;
+    /**
+     * @var
+     */
     private $product;
+    /**
+     * @var
+     */
     private $appRepo;
 
     /**
      * __construct
      *
-     * @param SessionHandler $sessionHandler Session Handling object
-     * @param Receiver       $receiver       Receive handler
-     * @param Sender         $sender         Send Handler
-     * @param Producer       $producer       Menu Manager
+     * @param SessionHandlerInterface $sessionHandler Session Handling object
+     * @param ReceiverInterface       $receiver       Receive handler
+     * @param SenderInterface         $sender         Send Handler
+     * @param ProducerInterface       $producer       Menu Manager
      */
     public function __construct(
         SessionHandlerInterface $sessionHandler,
@@ -61,6 +82,11 @@ class Handler
         $this->producer = $producer;
     }
 
+    /**
+     * @param array $request
+     *
+     * @return $this
+     */
     public function receive(array $request)
     {
         $request = $this->receiver->receive($request);
@@ -72,26 +98,44 @@ class Handler
         return $this;
     }
 
+    /**
+     * @param $option
+     */
     public function getOption($option)
     {
     }
 
+    /**
+     * @param $option
+     */
     public function setOption($option)
     {
     }
 
+    /**
+     * @param $custom_message
+     */
     public function setMessage($custom_message)
     {
     }
 
+    /**
+     * @param $server_details
+     */
     public function setConfiguration($server_details)
     {
     }
 
+    /**
+     * @param $CONSTANT
+     */
     public function setResponse($CONSTANT)
     {
     }
 
+    /**
+     *
+     */
     public function makeResponse()
     {
     }
