@@ -2,35 +2,34 @@
 
 namespace Ideamart\USSD\Ideamart\Sender;
 
-use Ideamart\USSD\Ideamart\Core;
 use Ideamart\USSD\Ideamart\Sender\Broker\ServiceBroker;
 use Ideamart\USSD\Ideamart\Sender\Contracts\FormatterInterface;
-use Illuminate\Contracts\Foundation\Application;
+use Joomtriggers\Ideamart\Core;
 
-class Sender {
+class Sender
+{
 
-	use Core;
+    use Core;
 
-	protected $app;
+    protected $app;
 
-	protected $serviceProvider;
+    protected $serviceProvider;
 
-	protected $config;
+    protected $formatter;
 
-	protected $formatter;
+    public function __construct(
+        ServiceBroker $broker,
+        FormatterInterface $formatterInterface
+    )
+    {
+        $this->serviceProvider = $broker;
+        $this->formatter = $formatterInterface;
+    }
 
-	public function __construct(Application $application,
-		ServiceBroker $broker,
-		FormatterInterface $formatterInterface
-	) {
-		$this->app = $application;
-		$this->config = $this->app->make('config');
-		$this->serviceProvider = $broker;
-		$this->formatter = $formatterInterface;
-	}
+    public function send($product)
+    {
+        $product = $this->formatter->resolveJsonStream($product, $this->serviceProvider);
 
-	public function send($product) {
-		$product = $this->formatter->resolveJsonStream($product, $this->serviceProvider);
-		return $this->sendRequest($product, $this->serviceProvider->server_url);
-	}
+        return $this->sendRequest($product, $this->serviceProvider->server_url);
+    }
 }

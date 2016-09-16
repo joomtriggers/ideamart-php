@@ -14,7 +14,6 @@
 namespace Ideamart\USSD\Ideamart;
 
 
-//$handler = new \Joomtriggers\Ideamart\Handler();
 
 use Joomtriggers\Ideamart\Contracts\USSD\ProducerInterface;
 use Joomtriggers\Ideamart\Contracts\USSD\ReceiverInterface;
@@ -90,7 +89,6 @@ class Handler
             ->setRequest($request)
             ->translateMessage()
             ->makeMessage();
-
         return $this;
     }
 

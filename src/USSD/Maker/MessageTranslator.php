@@ -3,14 +3,15 @@
 namespace Ideamart\USSD\Ideamart\Maker;
 
 
+use Joomtriggers\Ideamart\Contracts\USSD\SessionHandlerInterface;
+
 class MessageTranslator {
     protected $session;
     protected $configLoader;
     protected $serviceBroker;
 
     public function __construct(
-        SessionHandler $sessionHandler,
-        Application $application,
+        SessionHandlerInterface $sessionHandler,
         ConfigLoader $configLoader,
         ServiceBroker $serviceBroker
     ) {
@@ -19,7 +20,7 @@ class MessageTranslator {
         $this->serviceBroker = $serviceBroker;
     }
 
-    public function translate(array $request, Parser $parser, ApplicationRepository $applicationRepository) {
+    public function translate(array $request, Parser $parser) {
         $message = $request['message'];
         $this->session->setParameters($request);
         $this->session->setAppId($applicationRepository->searchApplication('ideamart', $request['applicationId'])['_id']);
