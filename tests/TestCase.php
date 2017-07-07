@@ -14,12 +14,8 @@
  * @see PHPUnit_Framework_TestCase
  */
 namespace Joomtriggers\Ideamart\Tests;
-use \PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase as Cased;
 
-if (!class_exists('\PHPUnit\Framework\TestCase') &&
-	class_exists('\PHPUnit_Framework_TestCase')) {
-	class_alias('\PHPUnit_Framework_TestCase', '\PHPUnit\Framework\TestCase');
-}
 /**
  * Class: TestCase
  *
@@ -31,7 +27,7 @@ if (!class_exists('\PHPUnit\Framework\TestCase') &&
  *
  * @see PHPUnit_Framework_TestCase
  */
-class TestCase extends PHPUnit_Framework_TestCase
+class TestCase extends Cased
 {
 
 }
