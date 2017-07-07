@@ -14,8 +14,7 @@
  * @see PHPUnit_Framework_TestCase
  */
 namespace Joomtriggers\Ideamart\Tests;
-
-use PHPUnit_Framework_TestCase;
+use \PHPUnit_Framework_TestCase;
 
 
 /**
