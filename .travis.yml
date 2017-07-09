@@ -9,6 +9,9 @@ php:
 env:
   - ISOLATED=true
   - ISOLATED=false
+  - CLASSIC=true
+  - CLASSIC=false
+  
 before_script:
     - composer self-update
     - composer install --no-interaction
