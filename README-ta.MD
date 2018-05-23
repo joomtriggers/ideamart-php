@@ -1,4 +1,4 @@
-#PHP SDK for Dialog Ideamart
+# PHP SDK for Dialog Ideamart
 
 இந்த களஞ்சியம் கட்டாயமாக PHP 7.0.0 ஐ கொண்டு மட்டுமே தொழில்படும். இது கட்டாயமாக்கப்பட்டுள்ளது. அல்லாதுவிடில் இந்த களஞ்சியம் சரியாக வேலைசெய்யாமல் போகலாம்.
 
@@ -36,7 +36,4 @@ $handler->sms()
 $handler->sms()
     ->receive() //receive will be automatically handled if not passed, should be passed as a StdClass Object
     ->getSender();
-$handler->sms()
-    ->receive() //receive will be automatically handled if not passed, should be passed as a StdClass Object
-    ->getMessage();
 ```
