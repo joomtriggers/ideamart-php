@@ -153,9 +153,7 @@ class Handler
     public function send()
     {
         return $this->sender->send(
-            $this->messageBroker,
-            $this->addressBroker,
-            $this->configurationBroker);
+            $this->addressBroker, $this->configurationBroker, $this->messageBroker);
     }
 
     /**

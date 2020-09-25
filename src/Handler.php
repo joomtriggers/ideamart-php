@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class: Handler
  *
@@ -11,11 +10,13 @@
  * @license  MIT http://opensource.org/licenses/MIT/
  * @link     http://github.com/joomtriggers/ideamart-php/
  */
+
 namespace Joomtriggers\Ideamart;
 
-
 use Joomtriggers\Ideamart\Contracts;
+use Joomtriggers\Ideamart\LBS\Brokers as LBSBroker;
 use Joomtriggers\Ideamart\SMS\Brokers;
+
 /**
  * Class: Handler
  *
@@ -27,24 +28,23 @@ use Joomtriggers\Ideamart\SMS\Brokers;
  */
 class Handler
 {
-
     /**
      * __construct
      */
     public function __construct()
     {
-
     }
 
     /**
      * Passing SMS to SMS\Handler
      *
-     * @param Contracts\MessageBrokerInterface $messageBroker Broker Interface
-     * @param Contracts\AddressBrokerInterface $addressBroker Broker Interface
-     * @param Contracts\ServiceBrokerInterface $serviceBroker Broker Interface
+     * @param Contracts\MessageBrokerInterface $messageBroker       Broker Interface
+     * @param Contracts\AddressBrokerInterface $addressBroker       Broker Interface
+     * @param Contracts\ServiceBrokerInterface $serviceBroker       Broker Interface
      * @param Contracts\ConfigurationInterface $configurationBroker Broker Interface
-     * @param Contracts\SenderInterface $sender Broker Interface
-     * @param Contracts\ReceiverInterface $receiver
+     * @param Contracts\SenderInterface        $sender              Broker Interface
+     * @param Contracts\ReceiverInterface      $receiver
+     *
      * @return SMS\Handler
      */
     public function sms(
@@ -53,12 +53,14 @@ class Handler
         Contracts\ConfigurationInterface $configurationBroker = null,
         Contracts\SenderInterface $sender = null,
         Contracts\ReceiverInterface $receiver = null
-    ) {
-        $messageBroker = $messageBroker?$messageBroker:new Brokers\MessageBroker();
-        $addressBroker = $addressBroker?$addressBroker:new Brokers\AddressBroker();
-        $configurationBroker = $configurationBroker?$configurationBroker:new SMS\Configuration();
-        $sender = $sender?$sender:new SMS\Sender();
-        $receiver = $receiver?$receiver:new SMS\Receiver();
+    )
+    {
+        $messageBroker       = $messageBroker ? $messageBroker : new Brokers\MessageBroker();
+        $addressBroker       = $addressBroker ? $addressBroker : new Brokers\AddressBroker();
+        $configurationBroker = $configurationBroker ? $configurationBroker : new SMS\Configuration();
+        $sender              = $sender ? $sender : new SMS\Sender();
+        $receiver            = $receiver ? $receiver : new SMS\Receiver();
+
         return new SMS\Handler(
             $addressBroker,
             $messageBroker,
@@ -68,11 +70,38 @@ class Handler
         );
     }
 
-
-    public function ussd(){
-
+    public function ussd()
+    {
     }
 
+    /**
+     * Passing SMS to SMS\Handler
+     *
+     * @param Contracts\MessageBrokerInterface $messageBroker       Broker Interface
+     * @param Contracts\AddressBrokerInterface $addressBroker       Broker Interface
+     * @param Contracts\ServiceBrokerInterface $serviceBroker       Broker Interface
+     * @param Contracts\ConfigurationInterface $configurationBroker Broker Interface
+     * @param Contracts\SenderInterface        $sender              Broker Interface
+     * @param Contracts\ReceiverInterface      $receiver
+     *
+     * @return LBS\Handler
+     */
+    public function LBS(
+        Contracts\MessageBrokerInterface $messageBroker = null,
+        Contracts\AddressBrokerInterface $addressBroker = null,
+        Contracts\ConfigurationInterface $configurationBroker = null,
+        Contracts\SenderInterface $sender = null,
+        Contracts\ReceiverInterface $receiver = null
+    )
+    {
+        $addressBroker       = $addressBroker ?: new LBSBroker\AddressBroker();
+        $configurationBroker = $configurationBroker ?: new LBS\Configuration();
+        $sender              = $sender ?: new LBS\Sender();
 
-
+        return new LBS\Handler(
+            $addressBroker,
+            $configurationBroker,
+            $sender
+        );
+    }
 }

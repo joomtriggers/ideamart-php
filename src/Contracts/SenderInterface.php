@@ -1,14 +1,10 @@
 <?php
 
 namespace Joomtriggers\Ideamart\Contracts;
-
 interface SenderInterface
 {
-
     public function send(
-        MessageBrokerInterface $messageBrokerInterface,
-        AddressBrokerInterface $addressBrokerInterface,
-        ConfigurationInterface $configurationInterface);
+        AddressBrokerInterface $addressBrokerInterface, ConfigurationInterface $configurationInterface, MessageBrokerInterface $messageBrokerInterface = null);
 }
 
 
